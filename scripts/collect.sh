@@ -21,7 +21,7 @@ done
   printf 'iStoreOS branch: istoreos-25.12\n'
   printf 'iStoreOS commit: '; git -C "$SOURCE_DIR" rev-parse HEAD
   if [ -d "$SOURCE_DIR/feeds/qmodem/.git" ]; then
-    printf 'QModem: https://github.com/LianXia233/QModem\n'
+    printf 'QModem: https://github.com/FUjr/QModem\n'
     printf 'QModem commit: '; git -C "$SOURCE_DIR/feeds/qmodem" rev-parse HEAD
   fi
   printf 'Target: x86/64\n'

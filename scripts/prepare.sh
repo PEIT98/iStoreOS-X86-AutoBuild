@@ -7,13 +7,15 @@ SOURCE_DIR="$(cd "$SOURCE_DIR" && pwd)"
 cd "$SOURCE_DIR"
 
 echo "==> Upstream: $(git rev-parse HEAD)"
-echo "==> Add modified QModem feed"
+echo "==> Add official QModem feed (FUjr/QModem)"
 # Keep official iStoreOS 25.12 feed definitions unchanged; append one extra feed.
 if ! grep -qE '^src-git qmodem ' feeds.conf.default; then
-  printf '\nsrc-git qmodem https://github.com/LianXia233/QModem.git;main\n' >> feeds.conf.default
+  printf '\nsrc-git qmodem https://github.com/FUjr/QModem.git;main\n' >> feeds.conf.default
 fi
 
 ./scripts/feeds update -a
+# Register official QModem packages first; keep all existing iStoreOS feeds.
+./scripts/feeds install -a -p qmodem
 ./scripts/feeds install -a
 
 cp "$REPO_DIR/configs/x86-64.config" .config

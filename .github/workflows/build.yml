@@ -8,14 +8,7 @@ on:
         required: true
         default: true
         type: boolean
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/build.yml'
-      - 'configs/**'
-      - 'scripts/**'
-  schedule:
-    - cron: '0 20 * * 6' # Sunday 04:00 Asia/Shanghai
+  # Manual dispatch only: never build automatically on pushes or schedules.
 
 permissions:
   contents: write
@@ -55,11 +48,6 @@ jobs:
             squashfs-tools ccache help2man cmake ninja-build pkgconf \
             libxml2-utils xmlto xsltproc zip
 
-      - name: Install Rust for QModem
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: x86_64-unknown-linux-musl
-
       - name: Clone official iStoreOS 25.12
         run: |
           set -euo pipefail
@@ -94,7 +82,7 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub Release
-        if: github.event_name != 'workflow_dispatch' || inputs.publish_release == true
+        if: inputs.publish_release == true
         uses: softprops/action-gh-release@v2
         with:
           tag_name: autobuild-25.12-${{ github.run_id }}
