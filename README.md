@@ -6,13 +6,14 @@
 
 - iStoreOS / iStore / LuCI 与 x86-64 BIOS、UEFI 磁盘镜像（以实际编译结果为准）
 - [FUjr/QModem](https://github.com/FUjr/QModem) 官方原版：`qmodem` + `luci-app-qmodem-next`；官方保留旧版 Lua 页面，本固件仅选择 Next 界面
-- 5G/4G USB 模组：QMI、MBIM、NCM、RNDIS、USB 串口、`uqmi`、`umbim` 等
+- 5G/4G USB 模组：QMI、MBIM、NCM、ECM、RNDIS、USB 串口，以及华为 NCM、Sierra 驱动
+- PCIe 模组：内核自带的 Qualcomm MHI 控制/MBIM 驱动，以及 MediaTek T7xx（如 FM350）驱动
 - Realtek RTL8852AE / 8852BE / 8852CE / 8922AE Wi-Fi
 - MediaTek MT7916 / MT7921 / MT7925 Wi-Fi
 - Qualcomm QCNFA765（`ath11k-pci` + WCN6855 固件）
 - Intel AX200 / AX210 / BE200 Wi-Fi；Intel e1000e / igb / igc / ixgbe 和 Realtek r8169 以太网
 
-配置文件在 `configs/x86-64.config`，有线网卡 r8125、r8126 与 PCIe 5G MHI 等暂不默认开启，后续按硬件需要添加。
+配置文件在 `configs/x86-64.config`。QModem 的 PCIe 自动扫描沿用官方默认配置；官方“通用 PCIe 驱动”选项依赖 iStoreOS 25.12 中不存在的 `kmod-mhi-wwan`，所以这里直接选择内核自带的 MHI 驱动，未修改官方 QModem。PCIe 模组需切到驱动支持的模式（常见为 MBIM），具体以模组型号为准。有线网卡 r8125、r8126 暂不默认开启。
 
 ## 构建操作
 

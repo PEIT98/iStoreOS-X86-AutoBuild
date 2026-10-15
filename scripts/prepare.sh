@@ -26,6 +26,20 @@ required=(
   CONFIG_TARGET_x86_64
   CONFIG_PACKAGE_qmodem
   CONFIG_PACKAGE_luci-app-qmodem-next
+  CONFIG_PACKAGE_qmodem_INCLUDE_generic-qmi-wwan
+  CONFIG_PACKAGE_qmodem_INCLUDE_ADD_MTK_T7XX_SUPPORT
+  CONFIG_PACKAGE_kmod-usb-net-qmi-wwan
+  CONFIG_PACKAGE_kmod-usb-net-cdc-mbim
+  CONFIG_PACKAGE_kmod-usb-net-huawei-cdc-ncm
+  CONFIG_PACKAGE_kmod-usb-serial-sierrawireless
+  CONFIG_PACKAGE_kmod-usb-net-sierrawireless
+  CONFIG_PACKAGE_kmod-mhi-bus
+  CONFIG_PACKAGE_kmod-mhi-pci-generic
+  CONFIG_PACKAGE_kmod-mhi-net
+  CONFIG_PACKAGE_kmod-mhi-wwan-ctrl
+  CONFIG_PACKAGE_kmod-mhi-wwan-mbim
+  CONFIG_PACKAGE_kmod-qrtr-mhi
+  CONFIG_PACKAGE_kmod-mtk-t7xx
   CONFIG_PACKAGE_kmod-rtw89-8852be
   CONFIG_PACKAGE_kmod-rtw89-8922ae
   CONFIG_PACKAGE_kmod-mt7915e
@@ -48,5 +62,5 @@ if ! grep -qx 'CONFIG_GRUB_EFI_IMAGES=y' .config; then
 fi
 
 printf '\n==> Firmware config OK; selected packages:\n'
-grep -E '^CONFIG_PACKAGE_(qmodem|luci-app-qmodem-next|kmod-rtw89-8852be|kmod-rtw89-8922ae|kmod-mt7915e|kmod-ath11k-pci)=' .config || true
+grep -E '^CONFIG_PACKAGE_(qmodem|luci-app-qmodem-next|kmod-usb-net-qmi-wwan|kmod-usb-net-cdc-mbim|kmod-mhi-pci-generic|kmod-mhi-wwan-mbim|kmod-mtk-t7xx|kmod-rtw89-8852be|kmod-rtw89-8922ae|kmod-mt7915e|kmod-ath11k-pci)=' .config || true
 df -h .
